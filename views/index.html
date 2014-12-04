@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://rawgit.com/taye/interact.js/master/interact.js"></script>
+    <style type="text/css">
+        .container {
+            width: 100%;
+            height: 600px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        #drag-me {
+            width: 25%;
+            height: 200px;
+            margin: 10%;
+            background-color: #29e;
+            color: white;
+            border: solid 0.4em #666;
+            border-radius: 0.75em;
+            padding: 3%;
+        }
+        #drag-me::before {
+            content: "#" attr(id);
+            color: #000;
+        }
+    </style>
+    <script type="text/javascript">
+        interact('.draggable')
+            .draggable({
+                onmove: function (event) {
+                    var target = event.target,
+                        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                    target.style.webkitTransform =
+                        target.style.transform =
+                        'translate(' + x + 'px, ' + y + 'px)';
+
+                    target.setAttribute('data-x', x);
+                    target.setAttribute('data-y', y);
+                },
+                onend: function (event) {
+                    var textEl = event.target.querySelector('p');
+
+                    textEl && (textEl.textContent =
+                        'moved a distance of ' + (Math.sqrt(event.dx * event.dx + event.dy * event.dy) | 0) + 'px');
+                }
+            })
+            .snap({
+                mode: 'grid',
+                grid: {
+                    x: 30,
+                    y: 30
+                },
+                range: Infinity,
+                elementOrigin: {
+                    x: 0,
+                    y: 0
+                }
+            })
+            .inertia(true)
+            .restrict({
+                drag: "parent",
+                endOnly: true,
+                elementRect: {
+                    top: 0,
+                    left: 0,
+                    bottom: 1,
+                    right: 1
+                }
+            });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="drag-me" class="draggable">
+            <p>Click or touch and drag this element around</p>
+        </div>
+    </div>
+</body>
+
+</html>
+

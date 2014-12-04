@@ -1,0 +1,15 @@
+#grid-snap {
+    width: 40%;
+    background-color: #4e4;
+    color: #fff;
+    font-size: 1.2em;
+    border-radius: 4px;
+    padding: 2%;
+    margin: 5%;
+}
+#grid-snap::after {
+    content: attr(data-x)", " attr(data-y);
+    background-color: #29e;
+    color: #fff;
+    float: right;
+}
