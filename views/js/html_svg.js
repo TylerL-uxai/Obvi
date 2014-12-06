@@ -4,7 +4,7 @@
  * https://raw.github.com/taye/interact.js/master/LICENSE
  */
 
-(function(interact) {
+(function (interact) {
     'use strict';
 
     var svg,
@@ -12,42 +12,42 @@
         SVGElement = window.SVGElement;
 
     function DemoGraphic(id) {
-            var width = window.innerWidth,
-                height = window.innerHeight,
-                group = svg.appendChild(document.createElementNS(svgNS, 'g')),
-                ellipse = group.appendChild(document.createElementNS(svgNS, 'ellipse')),
-                text = group.appendChild(document.createElementNS( svgNS, 'text')),
-                title = group.appendChild(document.createElementNS(svgNS, 'text'));
+        var width = window.innerWidth,
+            height = window.innerHeight,
+            group = svg.appendChild(document.createElementNS(svgNS, 'g')),
+            ellipse = group.appendChild(document.createElementNS(svgNS, 'ellipse')),
+            text = group.appendChild(document.createElementNS(svgNS, 'text')),
+            title = group.appendChild(document.createElementNS(svgNS, 'text'));
 
 
-            ellipse.demo = true;
-            ellipse.text = text;
-            window[id] = ellipse;
+        ellipse.demo = true;
+        ellipse.text = text;
+        window[id] = ellipse;
 
-            ellipse.dragX = Math.random()*(width - 200);
-            ellipse.dragY = Math.random()*(height - 200);
-            ellipse.resizeWidth  = 80;
-            ellipse.resizeHeight = 80;
+        ellipse.dragX = Math.random() * (width - 200);
+        ellipse.dragY = Math.random() * (height - 200);
+        ellipse.resizeWidth = 80;
+        ellipse.resizeHeight = 80;
 
-            group.setAttribute('transform', ['translate(', ellipse.dragX, ellipse.dragY, ')'].join(' '));
-            group.setAttribute('class', 'demo-node');
+        group.setAttribute('transform', ['translate(', ellipse.dragX, ellipse.dragY, ')'].join(' '));
+        group.setAttribute('class', 'demo-node');
 
-            ellipse.setAttribute('cx', 0);
-            ellipse.setAttribute('cy', 0);
-            ellipse.setAttribute('rx', ellipse.resizeWidth);
-            ellipse.setAttribute('ry', ellipse.resizeHeight);
+        ellipse.setAttribute('cx', 0);
+        ellipse.setAttribute('cy', 0);
+        ellipse.setAttribute('rx', ellipse.resizeWidth);
+        ellipse.setAttribute('ry', ellipse.resizeHeight);
 
-            title.textContent = id;
-            title.setAttribute('class', 'title');
-            text.setAttribute('class', 'eventData');
+        title.textContent = 'hello';
+        title.setAttribute('class', 'title');
+        text.setAttribute('class', 'eventData');
 
 
-            this.group = group;
-            this.ellipse = ellipse;
-            this.text = text;
-            this.title = title;
+        this.group = group;
+        this.ellipse = ellipse;
+        this.text = text;
+        this.title = title;
 
-            /*
+        /*
             interact(this.ellipse).set({
                 draggable: true,
                 dropzone: true,
@@ -56,18 +56,18 @@
            */
     }
 
-    function DemoNode (id) {
+    function DemoNode(id) {
         this.element = document.body.appendChild(document.createElement('div'));
         this.element.className = 'demo-node';
         this.element.id = id;
         this.element.demo = true;
-        this.element.style.width  = '200px';
+        this.element.style.width = '200px';
         this.element.style.height = '200px';
 
         this.element.text = this.element.appendChild(document.createElement('pre'));
         this.element.appendChild(document.createElement('br'));
-        this.element.style.left = Math.random()*((window.innerWidth || 800) - 200) + 'px';
-        this.element.style.top = Math.random()*((window.innerHeight || 800) - 200) + 'px';
+        this.element.style.left = Math.random() * ((window.innerWidth || 800) - 200) + 'px';
+        this.element.style.top = Math.random() * ((window.innerHeight || 800) - 200) + 'px';
 
         /*interact(this.element).set({
             draggable: true,
@@ -86,7 +86,7 @@
         textProp = 'textContent';
         nl = '\n';
 
-        if ( target.demo && indexOf(interact.eventTypes, e.type) !== -1 ) {
+        if (target.demo && indexOf(interact.eventTypes, e.type) !== -1) {
             target.text[textProp] = nl + e.type;
             target.text[textProp] += nl + ' x0, y0      : (' + e.x0 + ', ' + e.y0 + ')';
             target.text[textProp] += nl + ' dx, dy      : (' + e.dx + ', ' + e.dy + ')';
@@ -140,7 +140,7 @@
             target.parentNode.setAttribute('transform', ['translate(', target.dragX, target.dragY, ')'].join(' '));
         } else {
             target.style.left = parseInt(target.style.left || 0, 10) + e.dx + 'px';
-            target.style.top  = parseInt(target.style.top || 0, 10)  + e.dy + 'px';
+            target.style.top = parseInt(target.style.top || 0, 10) + e.dy + 'px';
         }
     }
 
@@ -152,11 +152,10 @@
             target.resizeWidth += e.dx;
             target.resizeHeight += e.dy;
 
-            target.setAttribute('rx',  target.resizeWidth);
+            target.setAttribute('rx', target.resizeWidth);
             target.setAttribute('ry', target.resizeHeight);
-        }
-        else {
-            target.style.width  = Math.max(parseInt(target.style.width  || 0, 10) + e.dx, 50) + 'px';
+        } else {
+            target.style.width = Math.max(parseInt(target.style.width || 0, 10) + e.dx, 50) + 'px';
             target.style.height = Math.max(parseInt(target.style.height || 0, 10) + e.dy, 50) + 'px';
         }
     }
@@ -164,34 +163,34 @@
     interact.on('resizemove', resizeMove);
     interact.on('dragmove', dragMove);
 
-    function dropNode (e) {
+    function dropNode(e) {
         if ('SVGElement' in window && e.draggable instanceof SVGElement) {
             return;
         }
-  
+
         var dropzone = e.target,
             draggable = e.relatedTarget,
             dropzoneRect = dropzone.getClientRects()[0],
             parent = draggable.parentNode,
             dropRect = {
                 x: dropzoneRect.left + 20,
-                y: dropzoneRect.top  + 20
+                y: dropzoneRect.top + 20
             };
 
         dropRect.x += (window.scrollX || document.documentElement.scrollLeft);
         dropRect.y += (window.scrollY || document.documentElement.scrollTop);
-        dropRect.width  = (dropzoneRect.right  - dropzoneRect.left) / 2;
-        dropRect.height = (dropzoneRect.bottom - dropzoneRect.top)  / 2;
-        
+        dropRect.width = (dropzoneRect.right - dropzoneRect.left) / 2;
+        dropRect.height = (dropzoneRect.bottom - dropzoneRect.top) / 2;
+
         draggable.style.left = dropRect.x + 'px';
-        draggable.style.top  = dropRect.y + 'px';
-        draggable.style.width  = dropRect.width  + 'px';
+        draggable.style.top = dropRect.y + 'px';
+        draggable.style.width = dropRect.width + 'px';
         draggable.style.height = dropRect.height + 'px';
-        
+
         parent.appendChild(parent.removeChild(draggable));
     }
 
-    function onReady () {
+    function onReady() {
         var i;
 
         if ('SVGElement' in window) {
@@ -217,13 +216,31 @@
         }
 
         interact('div.demo-node, .demo-node ellipse')
-            .draggable({ max: 2 })
-            .gesturable({ max: 1 })
-            .resizable({ max: 2 })
+            .draggable({
+                max: 2
+            })
+            .gesturable({
+                max: 1
+            })
+            .resizable({
+                max: 2
+            })
+            .snap({
+                mode: 'grid',
+                grid: {
+                    x: 30,
+                    y: 30
+                },
+                range: Infinity,
+                elementOrigin: {
+                    x: 0,
+                    y: 0
+                }
+            })
             .dropzone(true);
     }
 
-    function indexOf (array, target) {
+    function indexOf(array, target) {
         for (var i = 0, len = array.length; i < len; i++) {
             if (array[i] === target) {
                 return i;
@@ -235,7 +252,7 @@
 
     interact.maxInteractions(Infinity);
 
-    interact(window).on('addEventListener' in document? 'DOMContentLoaded': 'load', onReady);
+    interact(window).on('addEventListener' in document ? 'DOMContentLoaded' : 'load', onReady);
 
     // Display event properties for debugging
     interact.on('resizestart', nodeEventDebug);
@@ -251,9 +268,9 @@
     interact.on('drop', dropNode);
 
     window.demo = {
-        DemoNode      : DemoNode,
-        DemoGraphic   : DemoGraphic,
+        DemoNode: DemoNode,
+        DemoGraphic: DemoGraphic,
         nodeEventDebug: nodeEventDebug,
-        eventProps    : eventProps
+        eventProps: eventProps
     };
 }(window.interact));
