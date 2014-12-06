@@ -9,9 +9,29 @@
     <script src="/views/js/html_svg.js"></script>
 
     <style type="text/css">
-        #star-demo {
-            display: block;
-            margin: auto;
+        #swipe {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: 0;
+            padding: 10%;
+            background-color: #29e;
+            color: #fff;
+            font-size: 8em;
+            font-size: 10vmin;
+            font-family: sans-serif;
+            cursor: default;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+            -webkit-touch-action: none;
+            -moz-touch-action: none;
+            -ms-touch-action: none;
+            touch-action: none;
         }
         .container {
             width: 100%;
@@ -40,56 +60,13 @@
             color: #000;
         }
     </style>
-    <script type="text/javascript">
-        interact('.draggable')
-            .draggable({
-                onmove: function (event) {
-                    var target = event.target,
-                        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-                        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-                    target.style.webkitTransform =
-                        target.style.transform =
-                        'translate(' + x + 'px, ' + y + 'px)';
-
-                    target.setAttribute('data-x', x);
-                    target.setAttribute('data-y', y);
-                },
-                onend: function (event) {
-                    var textEl = event.target.querySelector('p');
-
-                    textEl && (textEl.textContent =
-                        'moved a distance of ' + (Math.sqrt(event.dx * event.dx + event.dy * event.dy) | 0) + 'px');
-                }
-            })
-            .snap({
-                mode: 'grid',
-                grid: {
-                    x: 30,
-                    y: 30
-                },
-                range: Infinity,
-                elementOrigin: {
-                    x: 0,
-                    y: 0
-                }
-            })
-            .inertia(true)
-            .restrict({
-                drag: "parent",
-                endOnly: true,
-                elementRect: {
-                    top: 0,
-                    left: 0,
-                    bottom: 1,
-                    right: 1
-                }
-            });
-    </script>
 </head>
 
 <body>
+    <div>
 
+    </div>
 </body>
 
 </html>

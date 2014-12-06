@@ -265,6 +265,36 @@
     interact.on('dragmove', nodeEventDebug);
     interact.on('dragend', nodeEventDebug);
 
+
+    /*  ['doubletap'].forEach(function (eventType) {
+        interact('#swipe').on(eventType, function (event) {
+
+
+
+            if (event.type === 'doubletap') {
+
+                console.log('w00t!');
+            }
+
+            event.target.innerHTML = event.pointerType;
+
+            if (interact.supportsTouch() || interact.supportsPointerEvent()) {
+                event.target.innerHTML += ' #' + event.pointerId;
+            }
+
+            var interactionIndex = interact.debug().interactions.indexOf(event.interaction);
+
+            event.target.innerHTML += ' ' + event.type + '<br>(' + event.pageX + ', ' + event.pageY + ')<br>' + 'interaction #' + interactionIndex;
+
+            console.log(event.pointerType, event.pointerId, event.type, event.pageX, event.pageY, interactionIndex);
+
+            event.preventDefault();
+
+        });
+    });*/
+
+
+
     interact.on('drop', dropNode);
 
     window.demo = {
