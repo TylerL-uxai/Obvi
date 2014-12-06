@@ -266,32 +266,24 @@
     interact.on('dragend', nodeEventDebug);
 
 
-    /*  ['doubletap'].forEach(function (eventType) {
-        interact('#swipe').on(eventType, function (event) {
+    /*['tap', 'doubletap', 'hold', 'down', 'move', 'up'].forEach(function (eventType) {
+            interact('#swipe').on(eventType, function (event) {
+                event.target.innerHTML = event.pointerType;
 
+                if (interact.supportsTouch() || interact.supportsPointerEvent()) {
+                    event.target.innerHTML += ' #' + event.pointerId;
+                }
 
+                var interactionIndex = interact.debug().interactions.indexOf(event.interaction);
 
-            if (event.type === 'doubletap') {
+                event.target.innerHTML += ' ' + event.type + '<br>(' + event.pageX + ', ' + event.pageY + ')<br>' + 'interaction #' + interactionIndex;
 
-                console.log('w00t!');
-            }
+                console.log(event.pointerType, event.pointerId, event.type, event.pageX, event.pageY, interactionIndex);
 
-            event.target.innerHTML = event.pointerType;
-
-            if (interact.supportsTouch() || interact.supportsPointerEvent()) {
-                event.target.innerHTML += ' #' + event.pointerId;
-            }
-
-            var interactionIndex = interact.debug().interactions.indexOf(event.interaction);
-
-            event.target.innerHTML += ' ' + event.type + '<br>(' + event.pageX + ', ' + event.pageY + ')<br>' + 'interaction #' + interactionIndex;
-
-            console.log(event.pointerType, event.pointerId, event.type, event.pageX, event.pageY, interactionIndex);
-
-            event.preventDefault();
-
+                event.preventDefault();
+            });
         });
-    });*/
+*/
 
 
 
