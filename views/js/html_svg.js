@@ -83,6 +83,10 @@
             target = e.target,
             nl;
 
+        if (indexOf(e.type, 'doubletap' !== -1)) {
+            console.log('woot');
+        }
+
         textProp = 'textContent';
         nl = '\n';
 
@@ -160,8 +164,15 @@
         }
     }
 
+    interact(document).on('tap', function (event) {
+        new DemoGraphic('graphic');
+    });
+
+
     interact.on('resizemove', resizeMove);
     interact.on('dragmove', dragMove);
+
+
 
     function dropNode(e) {
         if ('SVGElement' in window && e.draggable instanceof SVGElement) {
@@ -256,6 +267,7 @@
 
     // Display event properties for debugging
     interact.on('resizestart', nodeEventDebug);
+    interact.on('doubletap', nodeEventDebug);
     interact.on('resizemove', nodeEventDebug);
     interact.on('resizeend', nodeEventDebug);
     interact.on('gesturestart', nodeEventDebug);
@@ -266,25 +278,23 @@
     interact.on('dragend', nodeEventDebug);
 
 
-    /*['tap', 'doubletap', 'hold', 'down', 'move', 'up'].forEach(function (eventType) {
-            interact('#swipe').on(eventType, function (event) {
-                event.target.innerHTML = event.pointerType;
+    ['tap', 'doubletap', 'hold', 'down', 'move', 'up'].forEach(function (eventType) {
+        interact('#swipe').on(eventType, function (event) {
+            event.target.innerHTML = event.pointerType;
 
-                if (interact.supportsTouch() || interact.supportsPointerEvent()) {
-                    event.target.innerHTML += ' #' + event.pointerId;
-                }
+            if (interact.supportsTouch() || interact.supportsPointerEvent()) {
+                event.target.innerHTML += ' #' + event.pointerId;
+            }
 
-                var interactionIndex = interact.debug().interactions.indexOf(event.interaction);
+            var interactionIndex = interact.debug().interactions.indexOf(event.interaction);
 
-                event.target.innerHTML += ' ' + event.type + '<br>(' + event.pageX + ', ' + event.pageY + ')<br>' + 'interaction #' + interactionIndex;
+            event.target.innerHTML += ' ' + event.type + '<br>(' + event.pageX + ', ' + event.pageY + ')<br>' + 'interaction #' + interactionIndex;
 
-                console.log(event.pointerType, event.pointerId, event.type, event.pageX, event.pageY, interactionIndex);
+            console.log(event.pointerType, event.pointerId, event.type, event.pageX, event.pageY, interactionIndex);
 
-                event.preventDefault();
-            });
+            event.preventDefault();
         });
-*/
-
+    });
 
 
     interact.on('drop', dropNode);
